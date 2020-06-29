@@ -29,7 +29,8 @@ router.get('/', function(req, res) {
       'p.price',
       'p.quantity',
       'p.image',
-      'p.id'  
+      'p.id',
+      'p.description'  
     ])
     .slice(startValue, endValue)
     .sort({id: .1})
@@ -63,7 +64,8 @@ router.get('/:prodId', function(req, res){
       'p.quantity',
       'p.image',
       'p.images',
-      'p.id'  
+      'p.id',
+      'p.description'
     ])
     .filter({'p.id': productId})
     .get()
@@ -107,7 +109,8 @@ router.get('/category/:catName', function(req, res) {
       'p.price',
       'p.quantity',
       'p.image',
-      'p.id'  
+      'p.id',
+      'p.description'
     ])
     .slice(startValue, endValue)
     .sort({id: .1})
