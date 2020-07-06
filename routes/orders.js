@@ -50,7 +50,7 @@ router.get('/:id', function(req, res) {
         on: `u.id = o.user_id`
       }
     ])
-    .withFields(['o.id', 'p.title as name', 'p.description', 'p.price', 'u.username'])
+    .withFields(['o.id', 'p.title as name', 'p.description', 'p.price', 'u.username', 'p.image', 'od.quantity as quantityOrdered'])
     .filter({'o.id': orderId})
     .getAll()
     .then(orders => {
@@ -77,7 +77,7 @@ router.post('/new', function(req, res){
 
             let data =  await database.table('products').filter({id: p.id}).withFields(['quantity']).get();
 
-            let incart = p.incart;
+            let incart = p.inCart;
 
             //Deduct the no. of pieces ordered from the quantity column in database
 
@@ -89,8 +89,7 @@ router.post('/new', function(req, res){
                }
             }else{
               data.quantity = 0;
-            }
-
+            }            
             //INSERT ORDER DETAILS W.R.T THE NEWLY GENERATED ORDER ID
             database.table('orders_details')
               .insert({
